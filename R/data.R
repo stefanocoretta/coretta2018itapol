@@ -3,7 +3,7 @@
 #' A dataset with measures from acoustics and articulatory data of Italian and Polish.
 #' The dataset contains durational measures of segments, voicing, and tongue gestures.
 #'
-#' @docType dataset
+#' @docType data
 #' @format A tibble with 1343 observations and 52 variables.
 #' \describe{
 #'   \item{index}{observation number within speaker}
