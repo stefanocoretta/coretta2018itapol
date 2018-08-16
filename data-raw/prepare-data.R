@@ -147,3 +147,10 @@ tongue_contours <- tongue_contours %>%
 kinematics_series <- kinematics_series %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli)
+
+#### Use data ####
+
+usethis::use_data(token_measures, kinematics, formants_series, tracegram, tongue_contours, kinematics_series, overwrite = TRUE)
+
+usethis::use_data(wavegram, compress = "xz", overwrite = TRUE)
+
