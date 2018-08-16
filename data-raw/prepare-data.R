@@ -82,7 +82,11 @@ tracegram <- list.files(
   pattern = "*-degg-tracing.csv",
   full.names = TRUE
 ) %>%
-  map_df(~read_csv(.))
+  map_df(~read_csv(.)) %>%
+  mutate(
+    closed_quotient = minimum - maximum,
+    peaks_ratio = maximum / minimum
+  )
 
 wavegram <- list.files(
   path = "./data-raw/datasets/egg",
@@ -115,7 +119,28 @@ kinematics_series <- list.files(
 
 #### Join ####
 
+# durations, voicing, gestures
 token_measures <- token_measures %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+kinematics <- kinematics %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+formants_series <- formants_series %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+tracegram <- tracegram %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+wavegram <- wavegram %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+tongue_contours <- tongue_contours %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli)
 
