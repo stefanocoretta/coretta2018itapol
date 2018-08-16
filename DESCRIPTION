@@ -7,6 +7,6 @@ Authors@R:
            role = c("aut", "cre"),
            email = paste0("stefano.coretta", "@", "gmail.com"))
 Description: It provides the datasets from an exploratory study of Italian and Polish voicing effects.
-License: What license it uses
+License: CC-BY-4.0
 Encoding: UTF-8
 LazyData: true
