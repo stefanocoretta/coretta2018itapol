@@ -125,6 +125,7 @@ token_measures <- token_measures %>%
   left_join(y = stimuli)
 
 kinematics <- kinematics %>%
+  mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli)
 
