@@ -6,26 +6,26 @@
 \title{Formant trajectories in Italian and Polish}
 \format{A tibble with 11565 observations and 20 variables.
 \describe{
-  \item{speaker}{speaker's ID}
-  \item{file}{audio chunk file name}
-  \item{word}{word stimulus}
-  \item{time}{time point within vowel (9 points per vowel)}
-  \item{f1}{(Hz) F1}
-  \item{f2}{(Hz) F2}
-  \item{f3}{(Hz) F3}
-  \item{f4}{(Hz) fundamental frequency (F0)}
-  \item{language}{speaker's native language (\code{Italian}, \code{Polish})}
-  \item{sex}{speaker's sex (\code{f}, \code{m})}
-  \item{item}{word ID number}
-  \item{ipa}{IPA transcription of the word}
-  \item{c1}{first consonant (C1)}
-  \item{c1_phonation}{voicing of C1 (\code{voiceless}, \code{voiced})}
-  \item{vowel}{V1 and V2 (\code{a}, \code{o}, \code{u})}
-  \item{anteropost}{backness of the vowel (\code{back}, \code{central})}
-  \item{height}{height of the vowel (\code{high}, \code{mid}, \code{low})}
-  \item{c2}{second consonant (C2)}
-  \item{c2_phonation}{voicing of C2 (\code{voiceless} or \code{voiced})}
-  \item{c2_place}{place of C2 (\code{coronal}, \code{velar})}
+  \item{\code{speaker}}{speaker's ID}
+  \item{\code{file}}{audio chunk file name}
+  \item{\code{word}}{word stimulus}
+  \item{\code{time}}{time point within vowel (9 points per vowel)}
+  \item{\code{f1}}{(Hz) F1}
+  \item{\code{f2}}{(Hz) F2}
+  \item{\code{f3}}{(Hz) F3}
+  \item{\code{f4}}{(Hz) fundamental frequency (F0)}
+  \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
+  \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+  \item{\code{item}}{word ID number}
+  \item{\code{ipa}}{IPA transcription of the word}
+  \item{\code{c1}}{first consonant (C1)}
+  \item{\code{c1_phonation}}{voicing of C1 (\code{voiceless}, \code{voiced})}
+  \item{\code{vowel}}{V1 and V2 (\code{a}, \code{o}, \code{u})}
+  \item{\code{anteropost}}{backness of the vowel (\code{back}, \code{central})}
+  \item{\code{height}}{height of the vowel (\code{high}, \code{mid}, \code{low})}
+  \item{\code{c2}}{second consonant (C2)}
+  \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
+  \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
 }}
 \usage{
 formants_series

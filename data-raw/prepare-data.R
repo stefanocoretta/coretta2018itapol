@@ -122,7 +122,14 @@ kinematics_series <- list.files(
 # durations, voicing, gestures
 token_measures <- token_measures %>%
   left_join(y = speakers) %>%
-  left_join(y = stimuli)
+  left_join(y = stimuli) %>%
+  mutate(
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  )
 
 kinematics <- kinematics %>%
   mutate(word = word(prompt, 2)) %>%
@@ -148,7 +155,14 @@ tongue_contours <- tongue_contours %>%
 
 kinematics_series <- kinematics_series %>%
   left_join(y = speakers) %>%
-  left_join(y = stimuli)
+  left_join(y = stimuli) %>%
+  mutate(
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  )
 
 #### Use data ####
 
