@@ -65,7 +65,8 @@ kinematics <- list.files(
   full.names = TRUE
 ) %>%
   read_aaa(., columns, format = "wide") %>%
-  select(-(X_1:Y_42))
+  select(-(X_1:Y_42)) %>%
+  left_join(y = token_measures)
 
 #### Dynamic ####
 
@@ -134,7 +135,14 @@ token_measures <- token_measures %>%
 kinematics <- kinematics %>%
   mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
-  left_join(y = stimuli)
+  left_join(y = stimuli) %>%
+  mutate(
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  )
 
 formants_series <- formants_series %>%
   left_join(y = speakers) %>%
