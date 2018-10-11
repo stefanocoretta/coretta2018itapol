@@ -1,0 +1,41 @@
+---
+title: "How to load the data"
+author: "Stefano Coretta"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to load the data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+The package `coretta2018itapol` provides a collection of data sets which contain a variety of measures extracted from ultrasound and acoustic data.
+
+# How to load the data
+
+First, you can load the package like you would with any other package.
+
+```{r load}
+library(coretta2018itapol)
+```
+
+To check which data sets are available, you can use the `data()` function.
+
+```{r data}
+data(package = "coretta2018itapol")
+```
+
+To load a data set, use `data()` and the name of the data set).
+
+```{r dataset}
+data("kinematics")
+```
