@@ -45,17 +45,23 @@ gestures <- list.files(
   read_aaa(., columns, format = "wide") %>%
   separate(label, c("gesture", "part")) %>%
   select(-(part:Y_42)) %>%
-  spread(gesture, seconds)
+  spread(gesture, seconds) %>%
+  select(-closure)
 
 token_measures <- full_join(durations, voicing) %>%
   full_join(y = gestures) %>%
   mutate(
+    c1_duration = (v1_ons - word_ons) * 1000,
+    c1_clos_duration = (c1_rel - word_ons) * 1000,
     c1_vot = (voicing_start - c1_rel) * 1000,
-    vor = (c2_rel - v_onset) * 1000,
-    gons_clos = (closure - GONS) * 1000,
-    gons_max = (max - GONS) * 1000,
-    nucleus_duration = (NOFF - NONS) * 1000,
-    rel_gons = (GONS - c1_rel) * 1000
+    c1_rvoff = (c2_ons - c1_rel) * 1000,
+    v1_duration = (c2_ons - v1_ons) * 1000,
+    c2_duration = (v2_ons - c2_ons) * 1000,
+    c2_clos_duration = (c2_rel - word_ons) * 1000,
+    v2_duration = (word_off - v2_ons) * 1000,
+    v_v = (v2_ons - v1_ons) * 1000,
+    word_duration = (word_off - word_ons) * 1000,
+    sentence_duration = (sentence_off - sentence_ons) * 1000
   )
 
 # data for 7 time points per token: GONS, peak 1, peak 2, NONS, NOFF, MAX, closure
@@ -115,7 +121,7 @@ kinematics_series <- list.files(
   select(-(X_1:Y_42)) %>%
   left_join(y = token_measures) %>%
   mutate(
-    proportion = (seconds - v_onset) / (v_offset - v_onset)
+    proportion = (seconds - v1_ons) / (c2_ons - v1_ons)
   )
 
 #### Join ####
@@ -129,7 +135,8 @@ token_measures <- token_measures %>%
       language == "Italian",
       8 / sentence_duration,
       6 / sentence_duration
-    )
+    ),
+    syl_rate_c = syl_rate - mean(syl_rate)
   )
 
 kinematics <- kinematics %>%
@@ -141,7 +148,8 @@ kinematics <- kinematics %>%
       language == "Italian",
       8 / sentence_duration,
       6 / sentence_duration
-    )
+    ),
+    syl_rate_c = syl_rate - mean(syl_rate)
   )
 
 formants_series <- formants_series %>%
@@ -169,7 +177,8 @@ kinematics_series <- kinematics_series %>%
       language == "Italian",
       8 / sentence_duration,
       6 / sentence_duration
-    )
+    ),
+    syl_rate_c = syl_rate - mean(syl_rate)
   )
 
 #### Use data ####
