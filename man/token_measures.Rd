@@ -11,6 +11,7 @@
   \item{\code{file}}{audio chunk file name}
   \item{\code{rec_date}}{date and time of recording}
   \item{\code{word}}{word stimulus}
+  \item{\code{time}}{(s) time of the sentence onset within the concatenated audio file}
   \item{\code{sentence_ons}}{(s) onset time of the sentence}
   \item{\code{sentence_off}}{(s) offset time of the sentence}
   \item{\code{word_ons}}{(s) onset time of the target word}
