@@ -61,7 +61,7 @@ token_measures <- full_join(durations, voicing) %>%
     v2_duration = (word_off - v2_ons) * 1000,
     v_v = (v2_ons - v1_ons) * 1000,
     word_duration = (word_off - word_ons) * 1000,
-    sentence_duration = (sentence_off - sentence_ons) * 1000
+    sentence_duration = sentence_off - sentence_ons
   )
 
 # data for 7 time points per token: GONS, peak 1, peak 2, NONS, NOFF, MAX, closure
