@@ -57,7 +57,7 @@ token_measures <- full_join(durations, voicing) %>%
     c1_rvoff = (c2_ons - c1_rel) * 1000,
     v1_duration = (c2_ons - v1_ons) * 1000,
     c2_duration = (v2_ons - c2_ons) * 1000,
-    c2_clos_duration = (c2_rel - word_ons) * 1000,
+    c2_clos_duration = (c2_rel - c2_ons) * 1000,
     v2_duration = (word_off - v2_ons) * 1000,
     v_v = (v2_ons - v1_ons) * 1000,
     word_duration = (word_off - word_ons) * 1000,
