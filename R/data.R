@@ -55,8 +55,8 @@
 #'   \item{\code{c2}}{second consonant (C2)}
 #'   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
 #'   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
-#'   \item{\code{syl_rate}}{speech rate as syllables per second}
-#'   \item{\code{syl_rate_c}}{centered speech rate as syllables per second}
+#'   \item{\code{speech_rate}}{speech rate as syllables per second}
+#'   \item{\code{speech_rate_c}}{centered speech rate as syllables per second}
 #' }
 "token_measures"
 
@@ -161,7 +161,7 @@
 #'   \item{\code{c2}}{second consonant (C2)}
 #'   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
 #'   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
-#'   \item{\code{syl_rate}}{speech rate as syllables per second}
+#'   \item{\code{speech_rate}}{speech rate as syllables per second}
 #'}
 "kinematics_series"
 
@@ -246,7 +246,7 @@
 #'   \item{\code{c2}}{second consonant (C2)}
 #'   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
 #'   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
-#'   \item{\code{syl_rate}}{speech rate as syllables per second}
+#'   \item{\code{speech_rate}}{speech rate as syllables per second}
 #'}
 "kinematics"
 

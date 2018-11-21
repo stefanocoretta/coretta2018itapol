@@ -131,12 +131,12 @@ token_measures <- token_measures %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   mutate(
-    syl_rate = ifelse(
+    speech_rate = ifelse(
       language == "Italian",
       8 / sentence_duration,
       6 / sentence_duration
     ),
-    syl_rate_c = syl_rate - mean(syl_rate)
+    speech_rate_c = speech_rate - mean(speech_rate)
   )
 
 kinematics <- kinematics %>%
@@ -144,12 +144,12 @@ kinematics <- kinematics %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   mutate(
-    syl_rate = ifelse(
+    speech_rate = ifelse(
       language == "Italian",
       8 / sentence_duration,
       6 / sentence_duration
     ),
-    syl_rate_c = syl_rate - mean(syl_rate)
+    speech_rate_c = speech_rate - mean(speech_rate)
   )
 
 formants_series <- formants_series %>%
@@ -173,12 +173,12 @@ kinematics_series <- kinematics_series %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   mutate(
-    syl_rate = ifelse(
+    speech_rate = ifelse(
       language == "Italian",
       8 / sentence_duration,
       6 / sentence_duration
     ),
-    syl_rate_c = syl_rate - mean(syl_rate)
+    speech_rate_c = speech_rate - mean(speech_rate)
   )
 
 #### Use data ####
