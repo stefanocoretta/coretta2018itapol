@@ -136,7 +136,7 @@ token_measures <- token_measures %>%
       8 / sentence_duration,
       6 / sentence_duration
     ),
-    speech_rate_c = speech_rate - mean(speech_rate)
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
   )
 
 kinematics <- kinematics %>%
@@ -149,7 +149,7 @@ kinematics <- kinematics %>%
       8 / sentence_duration,
       6 / sentence_duration
     ),
-    speech_rate_c = speech_rate - mean(speech_rate)
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
   )
 
 formants_series <- formants_series %>%
@@ -178,7 +178,7 @@ kinematics_series <- kinematics_series %>%
       8 / sentence_duration,
       6 / sentence_duration
     ),
-    speech_rate_c = speech_rate - mean(speech_rate)
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
   )
 
 #### Use data ####
