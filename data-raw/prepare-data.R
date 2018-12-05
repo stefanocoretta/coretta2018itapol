@@ -119,7 +119,7 @@ kinematics_series <- list.files(
 ) %>%
   read_aaa(., columns, format = "wide") %>%
   select(-(X_1:Y_42)) %>%
-  left_join(y = token_measures) %>%
+  inner_join(y = token_measures) %>%
   mutate(
     proportion = (seconds - v1_ons) / (c2_ons - v1_ons)
   )
