@@ -95,7 +95,7 @@
 #' A dataset with displacement and velocity of tongue tip, dorsum and, root
 #' during the production of vowels in Italian and Polish.
 #'
-#' @format A tibble with 7496 observations and 64 variables:
+#' @format A tibble with 6818 observations and 64 variables:
 #' \describe{
 #'   \item{\code{speaker}}{speaker's ID}
 #'   \item{\code{seconds}}{(s) time within audio file}
