@@ -1,7 +1,7 @@
 Package: coretta2018itapol
 Title: Data Package of an Exploratory Study of Italian and Polish Voicing Effects (Coretta 2018)
 Version: 0.0.0.9000
-Date: 2018-10-11
+Date: 2019-01-02
 Authors@R: 
     person(given = "Stefano",
            family = "Coretta",
