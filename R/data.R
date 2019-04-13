@@ -10,6 +10,8 @@
 #'   \item{\code{speaker}}{speaker's ID}
 #'   \item{\code{file}}{audio chunk file name}
 #'   \item{\code{rec_date}}{date and time of recording}
+#'   \item{\code{ipu}}{SPPAS IPU index}
+#'   \item{\code{prompt}}{sentence stimulys}
 #'   \item{\code{word}}{word stimulus}
 #'   \item{\code{time}}{(s) time of the sentence onset within the concatenated audio file}
 #'   \item{\code{sentence_ons}}{(s) onset time of the sentence}
@@ -25,7 +27,6 @@
 #'   \item{\code{voicing_end}}{(s) time of voicing offset}
 #'   \item{\code{voicing_duration}}{(ms) duration of voiced interval}
 #'   \item{\code{voiced_points}}{number of points out of 5 within the first half of C1 closure in which voicing is present}
-#'   \item{\code{prompt}}{sentence stimulus}
 #'   \item{\code{GONS}}{(s) onset of C1 closing gesture}
 #'   \item{\code{max}}{(s) time of maximum displacement of C1 closing gesture}
 #'   \item{\code{NOFF}}{(s) offset of C1 gesture nucleus}
