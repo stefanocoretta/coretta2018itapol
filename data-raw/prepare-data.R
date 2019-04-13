@@ -28,7 +28,8 @@ durations <- list.files(
   pattern = "*-durations.csv",
   full.names = TRUE
 ) %>%
-  map_df(~read_csv(., na = "--undefined--"))
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  separate(ipu_prompt, c("ipu", "prompt"), sep = " ", extra = "merge")
 
 voicing <- list.files(
   path = "./data-raw/datasets/egg",
