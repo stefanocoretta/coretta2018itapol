@@ -46,6 +46,7 @@
 #'   \item{\code{sentence_duration}}{(s) duration of sentence}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}
@@ -78,6 +79,7 @@
 #'   \item{\code{f4}}{(Hz) fundamental frequency (F0)}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}
@@ -152,6 +154,7 @@
 #'   \item{\code{rel_gons}}{(ms) C2 closing gesture onset time from C1 release}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}
@@ -237,6 +240,7 @@
 #'   \item{\code{rel_gons}}{(ms) C2 closing gesture onset time from C1 release}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}
@@ -277,6 +281,7 @@
 #'   \item{\code{word}}{word stimulus}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}
@@ -310,6 +315,7 @@
 #'   \item{\code{peaks_ratio}}{peaks ratio}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}
@@ -341,6 +347,7 @@
 #'   \item{\code{amplitude}}{relative amplitude of the electroglottographic signal}
 #'   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
 #'   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+#'   \item{\code{glottocode}}{language Glottocode}
 #'   \item{\code{item}}{word ID number}
 #'   \item{\code{ipa}}{IPA transcription of the word}
 #'   \item{\code{c1}}{first consonant (C1)}

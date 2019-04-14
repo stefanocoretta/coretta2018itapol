@@ -46,6 +46,7 @@
   \item{\code{sentence_duration}}{(s) duration of sentence}
   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
+  \item{\code{glottocode}}{language Glottocode}
   \item{\code{item}}{word ID number}
   \item{\code{ipa}}{IPA transcription of the word}
   \item{\code{c1}}{first consonant (C1)}

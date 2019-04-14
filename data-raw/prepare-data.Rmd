@@ -1,0 +1,252 @@
+---
+title: "Prepare data"
+author: "Stefano Coretta"
+date: "14/04/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+library(tidyverse)
+library(rticulate)
+```
+
+## Metadata
+
+The datasets `speakers` and `stimuli` contain metadata on speakers and materials and will be joined with the datasets.
+`columns` is needed to import AAA data.
+
+```{r metadata}
+speakers <- read_csv("./data-raw/datasets/speakers.csv")
+stimuli <- read_csv("./data-raw/datasets/stimuli.csv")
+
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+```
+
+## Static data
+
+The following datasets contain static data from acoustics, UTI, and EGG.
+
+The `duration` data contains measurements of acoustic duration.
+The column `ipu_prompt` is from the SPPAS texgrids with the IPUs and we split it in two separate columns at the first whitespace, merging the other whitespaces into the second column.
+
+```{r durations}
+durations <- list.files(
+  path = "./data-raw/datasets/acoustics",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  separate(ipu_prompt, c("ipu", "prompt"), sep = " ", extra = "merge")
+```
+
+`voiging` has data from EGG.
+
+```{r voicing}
+voicing <- list.files(
+  path = "./data-raw/datasets/egg",
+  pattern = "*-voicing.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
+```
+
+`gestures` has the times of several gestural landmarks from the UTI data.
+
+```{r gestures}
+gestures <- list.files(
+  path = "./data-raw/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  separate(label, c("gesture", "part")) %>%
+  # we only need the gesture data, not the spline data
+  select(-(part:Y_42)) %>%
+  spread(gesture, seconds) %>%
+  select(-closure)
+```
+
+We can now join `durations`, `voicing`, and `gestures`.
+
+```{r token-measures}
+token_measures <- full_join(durations, voicing) %>%
+  full_join(y = gestures) %>%
+  mutate(
+    c1_duration = (v1_ons - word_ons) * 1000,
+    c1_clos_duration = (c1_rel - word_ons) * 1000,
+    c1_vot = (voicing_start - c1_rel) * 1000,
+    c1_rvoff = (c2_ons - c1_rel) * 1000,
+    v1_duration = (c2_ons - v1_ons) * 1000,
+    c2_duration = (v2_ons - c2_ons) * 1000,
+    c2_clos_duration = (c2_rel - c2_ons) * 1000,
+    v2_duration = (word_off - v2_ons) * 1000,
+    v_v = (v2_ons - v1_ons) * 1000,
+    word_duration = (word_off - word_ons) * 1000,
+    sentence_duration = sentence_off - sentence_ons
+  )
+```
+
+The following dataset is kinematic data from 7 time points per each token (GONS, peak 1, peak 2, NONS, NOFF, MAX, closure).
+
+```{r kinematics}
+kinematics <- list.files(
+  path = "./data-raw/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  # the wide format gives one token per row
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
+  left_join(y = token_measures)
+```
+
+## Dynamic
+
+These datasets have dynamic data (i.e. time series or spacial data).
+
+The `formant_series` contains formants data and is obtained from 9 points along the duration of V1.
+
+```{r formants-series}
+formants_series <- list.files(
+  path = "./data-raw/datasets/acoustics",
+  pattern = "*-formants.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
+```
+
+The following datasets are the tracegram and wavegram data from EGG.
+
+```{r egg}
+tracegram <- list.files(
+  path = "./data-raw/datasets/egg",
+  pattern = "*-degg-tracing.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(.)) %>%
+  mutate(
+    closed_quotient = minimum - maximum,
+    peaks_ratio = maximum / minimum
+  )
+
+wavegram <- list.files(
+  path = "./data-raw/datasets/egg",
+  pattern = "*-wavegram.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(.))
+```
+
+`tongue_contours` has spline data from AAA, obtained from 7 time points corresponding to the 7 gestural landmarks (GONS, peak 1, peak 2, NONS, NOFF, MAX, closure).
+
+```{r tongue-contours}
+tongue_contours <- list.files(
+  path = "./data-raw/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns)
+```
+
+`kinematics_series` is time series data of kinematik measures extracted from each ultrasonic frame along V1 duration.
+
+```{r kinematics-series}
+kinematics_series <- list.files(
+  path = "./data-raw/datasets/ultrasound",
+  pattern = "*-vowel-series.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
+  inner_join(y = token_measures) %>%
+  mutate(
+    proportion = (seconds - v1_ons) / (c2_ons - v1_ons)
+  )
+```
+
+## Join
+
+We can now join the datasets to the metadata datasets.
+We calculate speech rate (the formula depends on language, since it is based on number of syllables in the stimulus sentence and that differs in the two languages).
+
+```{r join}
+token_measures <- token_measures %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    speech_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    ),
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
+  )
+
+kinematics <- kinematics %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    speech_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    ),
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
+  )
+
+formants_series <- formants_series %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+tracegram <- tracegram %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+wavegram <- wavegram %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+tongue_contours <- tongue_contours %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+kinematics_series <- kinematics_series %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    speech_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    ),
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
+  )
+```
+
+## Use data
+
+```{r use-data}
+usethis::use_data(token_measures, kinematics, formants_series, tracegram, tongue_contours, kinematics_series, overwrite = TRUE)
+
+usethis::use_data(wavegram, compress = "xz", overwrite = TRUE)
+```
+
