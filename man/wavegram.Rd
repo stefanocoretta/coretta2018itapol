@@ -15,6 +15,7 @@
   \item{\code{sequence}}{index of glottal cycle within vowel duration}
   \item{\code{sample}}{sample within glottal cycle}
   \item{\code{amplitude}}{relative amplitude of the electroglottographic signal}
+  \item{\code{sequence_prop}}{proportion of glottal cycle index within vowel duration (sequence / max(sequence))}
   \item{\code{language}}{speaker's native language (\code{Italian}, \code{Polish})}
   \item{\code{sex}}{speaker's sex (\code{f}, \code{m})}
   \item{\code{glottocode}}{language Glottocode}

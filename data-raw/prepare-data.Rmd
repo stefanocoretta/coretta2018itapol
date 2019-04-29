@@ -151,7 +151,12 @@ wavegram <- list.files(
   pattern = "*-wavegram.csv",
   full.names = TRUE
 ) %>%
-  map_df(~read_csv(.))
+  map_df(~read_csv(.)) %>%
+  group_by(date) %>%
+  mutate(
+    sequence_prop = sequence / max(sequence)
+  ) %>%
+  ungroup()
 ```
 
 `tongue_contours` has spline data from AAA, obtained from 7 time points corresponding to the 7 gestural landmarks (GONS, peak 1, peak 2, NONS, NOFF, MAX, closure).
