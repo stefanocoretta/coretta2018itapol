@@ -2,18 +2,22 @@
 title: "Prepare data"
 author: "Stefano Coretta"
 date: "14/04/2019"
-output: html_document
+output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    theme: paper
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 # here package needed
 knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
 library(rticulate) # https://github.com/stefanocoretta/rticulate
 ```
 
-## Metadata
+# Metadata
 
 The datasets `speakers` and `stimuli` contain metadata on speakers and materials and will be joined with the datasets.
 `columns` is needed to import AAA data.
@@ -40,7 +44,7 @@ columns <- c(
 )
 ```
 
-## Static data
+# Static data
 
 The following datasets contain static data from acoustics, UTI, and EGG.
 
@@ -118,7 +122,7 @@ kinematics <- list.files(
   left_join(y = token_measures)
 ```
 
-## Dynamic
+# Dynamic
 
 These datasets have dynamic data (i.e. time series or spacial data).
 
@@ -187,7 +191,7 @@ kinematics_series <- list.files(
   )
 ```
 
-## Join
+# Join
 
 We can now join the datasets to the metadata datasets.
 We calculate speech rate (the formula depends on language, since it is based on number of syllables in the stimulus sentence and that differs in the two languages).
@@ -248,7 +252,7 @@ kinematics_series <- kinematics_series %>%
   )
 ```
 
-## Use data
+# Use data
 
 ```{r use-data}
 usethis::use_data(token_measures, kinematics, formants_series, tracegram, tongue_contours, kinematics_series, overwrite = TRUE)
