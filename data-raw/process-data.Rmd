@@ -13,10 +13,14 @@ library(speakr)
 library(beepr)
 ```
 
-## Tangle code
+# Tangle and wave code
 
 ```{r tangle}
 lmt("./data-raw/code/process.praat.md")
+```
+
+```{r wave}
+system("pandoc -f gfm -o ./data-raw/code/process.pdf ./data-raw/code/process.praat.md -N --syntax-definition=/Users/stefano/.pandoc/pandoc-praat/praat.xml --highlight-style=/Users/stefano/.pandoc/flamenco.theme --metadata-file=./data-raw/code/process.yaml")
 ```
 
 ## Ultrasound data
@@ -109,7 +113,7 @@ for (i in 1:length(speakers)) {
 
 1. **Get durations and formants**
     1. Run `get-durations.praat`: the output is written in the `results` folder
-   
+
 ```{r get-durations}
 speakers <- c(
   "it01", "it02", "it03", "it04", "it05", "it07", "it09", "it11", "it12", "it13", "it14",
