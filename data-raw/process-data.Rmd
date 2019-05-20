@@ -1,5 +1,5 @@
 ---
-title: "Voicing Effect project procedure"
+title: "`coretta2018itapol` data processing"
 author: "Stefano Coretta"
 date: "19/12/2017"
 output: html_document
@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-knitr::opts_knit$set(root.dir = normalizePath("../../"))
+knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
 library(speakr)
 library(beepr)
@@ -16,7 +16,7 @@ library(beepr)
 ## Tangle code
 
 ```{r tangle}
-lmt("./voicing-effect/code/process.praat.md")
+lmt("./data-raw/code/process.praat.md")
 ```
 
 ## Ultrasound data
@@ -44,8 +44,8 @@ languages <- c(
 
 for (i in 1:length(speakers)) {
   praat_run(
-    "./voicing-effect/code/search-area.praat",
-    "voicing-effect",
+    "./data-raw/code/search-area.praat",
+    "data-raw",
     speakers[i],
     languages[i]
   )
@@ -53,8 +53,8 @@ for (i in 1:length(speakers)) {
 
 for (i in 1:length(speakers)) {
   praat_run(
-    "./voicing-effect/code/closure-annotation.praat",
-    "voicing-effect",
+    "./data-raw/code/closure-annotation.praat",
+    "data-raw",
     speakers[i],
     languages[i]
   )
@@ -100,7 +100,7 @@ languages <- c(
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/release-detection-c1.praat",
+        "./data-raw/code/release-detection-c1.praat",
         speakers[i],
         languages[i]
     )
@@ -122,8 +122,8 @@ languages <- c(
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/get-durations.praat",
-        "voicing-effect",
+        "./data-raw/code/get-durations.praat",
+        "data-raw",
         speakers[i],
         languages[i]
     )
@@ -138,7 +138,7 @@ sex <- c(
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/get-formants.praat",
+        "./data-raw/code/get-formants.praat",
         speakers[i],
         sex[i]
     )
@@ -161,8 +161,8 @@ speakers <- c(
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/sync-egg.praat",
-        "voicing-effect",
+        "./data-raw/code/sync-egg.praat",
+        "data-raw",
         speakers[i],
         0
     )
@@ -170,8 +170,8 @@ for (i in 1:length(speakers)) {
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/extract-vuv.praat",
-        "voicing-effect",
+        "./data-raw/code/extract-vuv.praat",
+        "data-raw",
         speakers[i],
         40,
         10000,
@@ -182,8 +182,8 @@ for (i in 1:length(speakers)) {
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/degg-tracing.praat",
-        "voicing-effect",
+        "./data-raw/code/degg-tracing.praat",
+        "data-raw",
         speakers[i],
         40,
         10000,
@@ -193,7 +193,7 @@ for (i in 1:length(speakers)) {
 
 for (i in 1:length(speakers)) {
     praat_run(
-        "./voicing-effect/code/wavegram.praat",
+        "./data-raw/code/wavegram.praat",
         speakers[i]
     )
 }
@@ -205,7 +205,7 @@ beep()
 
 ```{r get-measurements}
 praat_run(
-    "./voicing-effect/code/get-measurements.praat",
+    "./data-raw/code/get-measurements.praat",
     speaker
 )
 ```
@@ -217,7 +217,7 @@ speakers <- c(
 )
 
 for (i in 1:length(speakers)) {
-  praat_run("./voicing-effect/code/voicing-duration.praat", speakers[i])
+  praat_run("./data-raw/code/voicing-duration.praat", speakers[i])
 }
 ```
 
