@@ -43,7 +43,7 @@ endif
 directory$ = "../data/ultrasound/derived/'speaker$'/concatenated"
 directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
-result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
+result_file$ = "../datasets/acoustics/'speaker$'-durations.csv"
 
 header$ = "index,speaker,file,rec_date,ipu_prompt,word,time,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
 

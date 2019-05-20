@@ -33,7 +33,7 @@ directory_us_annotations$ = "../data/ultrasound/derived/'speaker$'/
     ...recordings"
 directory_egg_vuv$ = "../data/egg/derived/'speaker$'"
 
-directory_out$ = "../data/datasets/acoustics'"
+directory_out$ = "../datasets/acoustics'"
 
 result_file$ = "'directory_out$'/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"

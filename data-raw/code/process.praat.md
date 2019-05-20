@@ -500,7 +500,7 @@ endform
 directory$ = "../data/egg/derived/'speaker$'"
 directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 
-result_file$ = "../data/datasets/egg/'speaker$'-degg-tracing.csv"
+result_file$ = "../datasets/egg/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,date,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -685,7 +685,7 @@ endform
 directory$ = "../data/egg/derived/'speaker$'"
 directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 
-result_file$ = "../data/datasets/egg/'speaker$'-degg-tracing-word.csv"
+result_file$ = "../datasets/egg/'speaker$'-degg-tracing-word.csv"
 header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -741,7 +741,7 @@ endif
 directory$ = "../data/ultrasound/derived/'speaker$'/concatenated"
 directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
-result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
+result_file$ = "../datasets/acoustics/'speaker$'-durations.csv"
 
 header$ = "index,speaker,file,rec_date,ipu_prompt,word,time,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
 
@@ -983,7 +983,7 @@ directory_us_annotations$ = "../data/ultrasound/derived/'speaker$'/
     ...recordings"
 directory_egg_vuv$ = "../data/egg/derived/'speaker$'"
 
-directory_out$ = "../data/datasets/acoustics'"
+directory_out$ = "../datasets/acoustics'"
 
 result_file$ = "'directory_out$'/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
@@ -1122,7 +1122,7 @@ endform
 
 vuvDirectory$ = "../data/egg/derived/'speaker$'"
 recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
-resultsFile$ = "../data/datasets/egg/'speaker$'-voicing.csv"
+resultsFile$ = "../datasets/egg/'speaker$'-voicing.csv"
 resultsHeader$ = "speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,voiced_points"
 writeFileLine: resultsFile$, resultsHeader$
 
@@ -1220,7 +1220,7 @@ endform
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../data/datasets/egg"
+results$ = "../datasets/egg"
 directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 createDirectory(results$)
 directory$ = "../data/egg/derived/'speaker$'"
@@ -1385,7 +1385,7 @@ else
 endif
 
 result_header$ = "speaker,file,word,time,f1,f2,f3,f0"
-result_file$ = "../data/datasets/acoustics/'speaker$'-formants.csv"
+result_file$ = "../datasets/acoustics/'speaker$'-formants.csv"
 writeFileLine: result_file$, result_header$
 
 <<<files loop>>>

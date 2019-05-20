@@ -37,7 +37,7 @@ else
 endif
 
 result_header$ = "speaker,file,word,time,f1,f2,f3,f0"
-result_file$ = "../data/datasets/acoustics/'speaker$'-formants.csv"
+result_file$ = "../datasets/acoustics/'speaker$'-formants.csv"
 writeFileLine: result_file$, result_header$
 
 directory_audio$ = "../data/ultrasound/derived/'speaker$'/recordings"

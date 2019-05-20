@@ -32,7 +32,7 @@ endform
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../data/datasets/egg"
+results$ = "../datasets/egg"
 directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 createDirectory(results$)
 directory$ = "../data/egg/derived/'speaker$'"
