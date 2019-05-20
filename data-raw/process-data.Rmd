@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 # here package needed
 knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
-library(speakr)
+library(speakr) # https://github.com/stefanocoretta/speakr
 library(beepr)
 ```
 

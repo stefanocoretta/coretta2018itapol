@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # here package needed
 knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
-library(rticulate)
+library(rticulate) # https://github.com/stefanocoretta/rticulate
 ```
 
 ## Metadata
