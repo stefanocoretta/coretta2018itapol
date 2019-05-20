@@ -23,18 +23,20 @@ lmt("./data-raw/code/process.praat.md")
 system("pandoc -f gfm -o ./data-raw/code/process.pdf ./data-raw/code/process.praat.md -N --syntax-definition=/Users/stefano/.pandoc/pandoc-praat/praat.xml --highlight-style=/Users/stefano/.pandoc/flamenco.theme --metadata-file=./data-raw/code/process.yaml")
 ```
 
-## Ultrasound data
+# Ultrasound data
 
-1. **Export** `.wav` and `.txt` from `AAA` to `data/ultrasound/derived/[ID]/recordings/` folder ([ID] = participant ID) as [ID]-nnn.wav
-1. **Force alignment and search area**
-    1. Run `alignment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `data/ultrasound/derived/[ID]/concatenated/`
-    1. Make sure the `.txt` contains "Mowie" (unicode safe because of AAA)
-    1. **WARNING OVERWRITE** Run SPPAS on concatenated `.wav` and `.txt`
-    1. Check alignment and save it to `data/ultrasound/raw/corrected-palign/`
-    1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file, saved in `data/ultrasound/derived/[ID]/recordings/`, and a merged TextGrid, saved in `data/ultrasound/derived/[ID]/concatenated/`
-        1. **NOTE**: Needed for EGG processing!
-    1. Run `closure-annotation.praat`: it reads the search area chunks and adds a tier for the time of closure onset
-    1. Import TextGrids back in `AAA`
+## Force-alignment
+
+**Export** `.wav` and `.txt` from `AAA` to `data-raw/data/ultrasound/derived/[ID]/recordings/` folder ([ID] = participant ID) as `[ID]-nnn.wav`.
+
+Run `alignment-input.praat`. The output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `data-raw/data/ultrasound/derived/[ID]/concatenated/`. Make sure the `.txt` contains 'Mowie' instead of 'Mówię' (unicode safe because of AAA).
+
+Run SPPAS on the concatenated `.wav` and `.txt` files. **WARNING**: This procedure overwrites the files.
+
+Perform manual correction of the alignment in `[ID]-palign.TextGrid` and save the corrected file to `data-raw/data/ultrasound/raw/corrected-palign/`.
+
+Run `search-area.praat`. The output is a TextGrid file for each `.wav` file, saved in `data-raw/data/ultrasound/derived/[ID]/recordings/`, and a merged TextGrid, saved in `data-raw/data/ultrasound/derived/[ID]/concatenated/`.
+**NOTE**: These files are needed for processing of the EGG data.
 
 ```{r search-area}
 speakers <- c(
@@ -54,7 +56,11 @@ for (i in 1:length(speakers)) {
     languages[i]
   )
 }
+```
 
+Run `closure-annotation.praat`. It reads the search area chunks and adds a tier for the time of closure onset.
+
+```{r closure-annotation}
 for (i in 1:length(speakers)) {
   praat_run(
     "./data-raw/code/closure-annotation.praat",
@@ -65,32 +71,45 @@ for (i in 1:length(speakers)) {
 }
 ```
 
-1. **Tongue tracking**
-    1. Create a spline template for the speaker and save it (`.fst`)
-    1. Batch process splines with template
-    1. Check splines
-    1. (Batch process snap-to-fit)
-1. **Calculate kinematics**
-    1. Check relevant fan lines for Tongue Dorsum, Tongue Tip, and Tongue Root
-    1. Load `AnaVal-[ID].avl` from `Edit values` and change fan lines numbers (Save it for the future)
-    1. Calculate Maths for entire session
-1. **Find consonantal gestures**
-    1. Select TD stimuli
-    1. `Find...` > `Load` and `execute` `td_function.srh`
-    1. `Find...` > `Load` and `execute` `find_gons_td.srh`
-    1. Select TT stimuli
-    1. `Find...` > `Load` and `execute` `tt_function.srh`
-    1. `Find...` > `Load` and `execute` `find_gons_tt.srh`
-1. **Export data** in `datasets/ultrasound/` folder
-    1. `Export-tongue-cart.xsu`: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity at peaks, nucleus onset and offset, gesture onset, closure onset, and maximum (Annotation: "_"), `[ID]-tongue-cart.tsv`
-    1. `Export-vowel-series.xsu`: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity for every frame within the vowel (Annotation: "\^[aoOu]$"), `[ID]-vowel-series.tsv`
-1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID].TextGrid`
-1. **Burst detection**
-    1. Run `burst-detection.praat`: the output is a `.TextGrid` file, written in `data/ultrasound/derived/[ID]/concatenated/`
-    1. Check bursts `[ID]-burst.TextGrid` + `[ID].wav`
-1. **C1 release detection**
-    1. Run `release-detection-c1.praat`: the output is a `.TextGrid` file, written in `data/ultrasound/derived/[ID]/concatenated/`
-    1. Check bursts `[ID]-realease-c1.TextGrid` + `[ID].wav`
+Now we can import the TextGrids back in `AAA`.
+
+## Tongue tracking and kinematics
+
+**Tongue tracking**:
+  1. Create a spline template for the speaker and save it (`.fst`).
+  1. Batch process splines with template.
+  1. Check splines.
+  1. (Batch process snap-to-fit).
+
+**Calculate kinematics**
+  1. Check relevant fan lines for Tongue Dorsum, Tongue Tip, and Tongue Root.
+  1. Load `AnaVal-[ID].avl` from `Edit values` and change fan lines numbers (Save it for the future).
+  1. Calculate Maths for entire session.
+
+**Find consonantal gestures**:
+  1. Select TD stimuli.
+  1. `Find...` > `Load` and `execute` `td_function.srh`.
+  1. `Find...` > `Load` and `execute` `find_gons_td.srh`.
+  1. Select TT stimuli.
+  1. `Find...` > `Load` and `execute` `tt_function.srh`.
+  1. `Find...` > `Load` and `execute` `find_gons_tt.srh`.
+
+**Export data**:
+  1. `Export-tongue-cart.xsu`: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity at peaks, nucleus onset and offset, gesture onset, closure onset, and maximum (Annotation: "_"), `[ID]-tongue-cart.tsv` in `data-raw/datasets/ultrasound/`.
+  1. `Export-vowel-series.xsu`: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity for every frame within the vowel (Annotation: "\^[aoOu]$"), `[ID]-vowel-series.tsv` in `data-raw/datasets/ultrasound/`.
+  1. Export kinematics annotations (from `Export > Files...`) in `data-raw/data/derived/ultrasound/[ID]/kinematics` folder as `[ID].TextGrid`.
+
+# Audio data
+
+## C2 release detection
+
+Run `burst-detection.praat`. The output is a `.TextGrid` file, written in `data-raw/data/ultrasound/derived/[ID]/concatenated/`. **WARNING:** This procedure overwrites corrected files!
+
+Check detection with `[ID]-burst.TextGrid` and `[ID].wav` and overwrite `[ID]-burst.TextGrid`.
+
+## C1 release detection
+
+Run `release-detection-c1.praat`: the output is a `.TextGrid` file, written in `data-raw/data/ultrasound/derived/[ID]/concatenated/`.
 
 ```{r release-c1}
 speakers <- c(
@@ -111,8 +130,11 @@ for (i in 1:length(speakers)) {
 }
 ```
 
-1. **Get durations and formants**
-    1. Run `get-durations.praat`: the output is written in the `results` folder
+Check detection with `[ID]-realease-c1.TextGrid` and `[ID].wav`. Save corrected file in `data-raw/data/ultrasound/raw/corrected-palign/`.
+
+## Get durations and formants
+
+Run `get-durations.praat`. The output is written in `data-raw/datasets/acoustics/`.
 
 ```{r get-durations}
 speakers <- c(
@@ -134,6 +156,8 @@ for (i in 1:length(speakers)) {
 }
 ```
 
+Run `get-formants.praat`. The output is written in `data-raw/datasets/acoustics/`.
+
 ```{r get-formants}
 sex <- c(
   "m", "m", "f", "f", "f", "m", "f", "m", "m", "f", "m",
@@ -149,15 +173,11 @@ for (i in 1:length(speakers)) {
 }
 ```
 
+# EGG data
 
-## EGG data
+Synchronise EGG files with `sync-egg.praat`. The output is written in `data-raw/data/egg/derived/[ID]/`.
 
-1. **Synchronise** EGG with `sync-egg.praat`: the output is written in `data/egg/derived/[ID]/`
-1. **Extract vuv** (Voiced/UnVoiced) with `extract-vuv.praat`: the output is written in the same folder as above
-1. **Calculate dEGG tracegrams** with `degg-tracing.praat`: the results are written in `data/datasets/egg/`
-1. **Extract wavegram data** with `wavegram.praat`.
-
-```{r sync-vuv-degg-wavegram}
+```{r sync-egg}
 speakers <- c(
   "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
   "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
@@ -171,7 +191,11 @@ for (i in 1:length(speakers)) {
         0
     )
 }
+```
 
+Extract vuv (Voiced/UnVoiced intervals) with `extract-vuv.praat`. The output is written in `data-raw/data/egg/derived/[ID]/`.
+
+```{r vuv}
 for (i in 1:length(speakers)) {
     praat_run(
         "./data-raw/code/extract-vuv.praat",
@@ -183,7 +207,11 @@ for (i in 1:length(speakers)) {
         0
     )
 }
+```
 
+Calculate dEGG tracegrams** with `degg-tracing.praat`. The results are written in `data-raw/data/datasets/egg/`.
+
+```{r tracegram}
 for (i in 1:length(speakers)) {
     praat_run(
         "./data-raw/code/degg-tracing.praat",
@@ -194,7 +222,11 @@ for (i in 1:length(speakers)) {
         11
     )
 }
+```
 
+Extract wavegram data with `wavegram.praat`.
+
+```{r wavegram}
 for (i in 1:length(speakers)) {
     praat_run(
         "./data-raw/code/wavegram.praat",
@@ -205,14 +237,7 @@ for (i in 1:length(speakers)) {
 beep()
 ```
 
-1. **Calculate measurements** from ultrasound and EGG annotations with `get-measurements.praat`: the resulting TextGrids are written in `/data/derived/merged/[ID]` and the measurements in `results` to the file `[ID]-measurements.csv`
-
-```{r get-measurements}
-praat_run(
-    "./data-raw/code/get-measurements.praat",
-    speaker
-)
-```
+Get voicing durations from EGG annotations with `voicing-duration.praat`.
 
 ```{r voicing-duration}
 speakers <- c(
@@ -225,8 +250,8 @@ for (i in 1:length(speakers)) {
 }
 ```
 
+# `AAA` files extensions
 
-## `AAA` files extensions
 * `.esu`: tabs in the main window
 * `.fst`: fans template
 * `.avl`: analysis values chart
