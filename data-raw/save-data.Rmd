@@ -260,3 +260,15 @@ usethis::use_data(token_measures, kinematics, formants_series, tracegram, tongue
 usethis::use_data(wavegram, compress = "xz", overwrite = TRUE)
 ```
 
+Save aggreagated `csv` files for use in other software.
+
+```{r aggregate}
+write_csv(token_measures, path = "./data-raw/aggregated/token-measures.csv")
+write_csv(kinematics, path = "./data-raw/aggregated/kinematics.csv")
+write_csv(formants_series, path = "./data-raw/aggregated/formants-series.csv")
+write_csv(tracegram, path = "./data-raw/aggregated/tracegram.csv")
+write_csv(tongue_contours, path = "./data-raw/aggregated/tongue-contours.csv")
+write_csv(kinematics_series, path = "./data-raw/aggregated/kinematics-series.csv")
+write_csv(wavegram, path = "./data-raw/aggregated/wavegram.csv")
+```
+
