@@ -191,6 +191,37 @@ kinematics_series <- list.files(
   )
 ```
 
+# DLC data
+
+```{r dlc-data}
+dlc_data <- read_tsv("data-raw/datasets/ultrasound/dlc-ultrasound.tsv")
+
+dlc_colnames <- colnames(dlc_data)
+dlc_colnames[1:6] <- c("participant", "date", "time_rec", "time_annot", "prompt", "annotation")
+colnames(dlc_data) <- dlc_colnames
+
+knot_labels <- tibble(
+  knot = 0:10,
+  dlc = "DLC_Tongue",
+  knot_label = c("Vallecula", "Root_1", "Root_2", "Body_1", "Body_2", "Dorsum_1", "Dorsum_2", "Blade_1", "Blade_2", "Tip_1", "Tip_2")
+)
+
+dlc_data <- dlc_data |> 
+  pivot_longer(
+    `X0 DLC_Tongue`:`Y1 DLC_ShorttendonMandible`,
+    names_to = c("coord_knot", "dlc"),
+    names_sep = " ",
+    values_to = "value"
+  ) |> 
+  separate_wider_position(coord_knot, c(coord = 1, knot = 2), too_few = "align_start") |> 
+  pivot_wider(names_from = coord, values_from = value) |> 
+  mutate(
+    knot = as.numeric(knot)
+  ) |> 
+  left_join(y = knot_labels)
+```
+
+
 # Join
 
 We can now join the datasets to the metadata datasets.
@@ -258,9 +289,10 @@ kinematics_series <- kinematics_series %>%
 usethis::use_data(token_measures, kinematics, formants_series, tracegram, tongue_contours, kinematics_series, overwrite = TRUE)
 
 usethis::use_data(wavegram, compress = "xz", overwrite = TRUE)
+usethis::use_data(dlc_data, compress = "xz", overwrite = TRUE)
 ```
 
-Save aggreagated `csv` files for use in other software.
+Save aggregated `csv` files for use in other software.
 
 ```{r aggregate}
 write_csv(token_measures, path = "./data-raw/aggregated/token-measures.csv")
@@ -270,5 +302,6 @@ write_csv(tracegram, path = "./data-raw/aggregated/tracegram.csv")
 write_csv(tongue_contours, path = "./data-raw/aggregated/tongue-contours.csv")
 write_csv(kinematics_series, path = "./data-raw/aggregated/kinematics-series.csv")
 write_csv(wavegram, path = "./data-raw/aggregated/wavegram.csv")
+write_csv(dlc_data, file = "./data-raw/aggregated/dlc-data.csv")
 ```
 

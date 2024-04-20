@@ -3,7 +3,7 @@
 \docType{data}
 \name{token_measures}
 \alias{token_measures}
-\title{Acousics and articulatory durational measures of Italian and Polish}
+\title{Acoustics and articulatory durational measures of Italian and Polish}
 \format{
 A tibble with 1343 observations and 52 variables.
 \describe{

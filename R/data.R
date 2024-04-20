@@ -1,4 +1,4 @@
-#' Acousics and articulatory durational measures of Italian and Polish
+#' Acoustics and articulatory durational measures of Italian and Polish
 #'
 #' A dataset with measures from acoustics and articulatory data of Italian and Polish.
 #' The dataset contains durational measures of segments, voicing, and tongue gestures.
@@ -361,3 +361,25 @@
 #'   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
 #'}
 "wavegram"
+
+
+#' DLC tongue knots data of Italian and Polish
+#'
+#' It contains the DLC tongue knots coordinates along time within the interval
+#' labelled "ultrasound" in the TextGrids.
+#'
+#' @format A tibble with DLC tongue knots data.:
+#' \describe{
+#'. \item{\code{participant}}{Participant's ID.}
+#'. \item{\code{date}}{Date of recording.}
+#'. \item{\code{time_rec}}{Time within recording.}
+#'. \item{\code{time_annot}}{Time within annotation interval.}
+#'. \item{\code{prompt}}{Prompt sentence.}
+#'. \item{\code{annotation}}{Label of annotation interval.}
+#'. \item{\code{knot}}{Knot number.}
+#'. \item{\code{dlc}}{DLC spline.}
+#'. \item{\code{X}}{X coordinate.}
+#'. \item{\code{Y}}{Y coordinate.}
+#'. \item{\code{knot_label}}{Knot label.}
+#' }
+"dlc_data"
