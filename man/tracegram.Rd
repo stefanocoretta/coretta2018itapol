@@ -4,7 +4,8 @@
 \name{tracegram}
 \alias{tracegram}
 \title{Tracegram data of Italian and Polish vowels}
-\format{A tibble with 16754 observation and 23 variables:
+\format{
+A tibble with 16754 observation and 23 variables:
 \describe{
   \item{\code{speaker}}{speaker's ID}
   \item{\code{file}}{audio chunk file name}
@@ -30,7 +31,8 @@
   \item{\code{c2}}{second consonant (C2)}
   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
-}}
+}
+}
 \usage{
 tracegram
 }

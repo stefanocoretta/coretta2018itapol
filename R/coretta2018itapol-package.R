@@ -6,6 +6,9 @@
 #' on the effect of consonant voicing on preceding vowel duration (the voicing
 #' effect).
 #'
-#' @docType package
-#' @name coretta2018itapol
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL

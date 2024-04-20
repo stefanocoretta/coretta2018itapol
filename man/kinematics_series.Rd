@@ -4,7 +4,8 @@
 \name{kinematics_series}
 \alias{kinematics_series}
 \title{Tongue tip, dorsum, root displacement and velocity in Italian and Polish}
-\format{A tibble with 6818 observations and 64 variables:
+\format{
+A tibble with 6818 observations and 64 variables:
 \describe{
   \item{\code{speaker}}{speaker's ID}
   \item{\code{seconds}}{(s) time within audio file}
@@ -72,7 +73,8 @@
   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
   \item{\code{speech_rate}}{speech rate as syllables per second}
-}}
+}
+}
 \usage{
 kinematics_series
 }

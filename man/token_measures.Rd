@@ -4,7 +4,8 @@
 \name{token_measures}
 \alias{token_measures}
 \title{Acousics and articulatory durational measures of Italian and Polish}
-\format{A tibble with 1343 observations and 52 variables.
+\format{
+A tibble with 1343 observations and 52 variables.
 \describe{
   \item{\code{index}}{observation number within speaker}
   \item{\code{speaker}}{speaker's ID}
@@ -59,7 +60,8 @@
   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
   \item{\code{speech_rate}}{speech rate as syllables per second}
   \item{\code{speech_rate_c}}{centered speech rate as syllables per second}
-}}
+}
+}
 \usage{
 token_measures
 }

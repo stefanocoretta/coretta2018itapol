@@ -4,7 +4,8 @@
 \name{tongue_contours}
 \alias{tongue_contours}
 \title{Tongue contours in Italian and Polish}
-\format{A tibble with 319116 rows and 30 variables:
+\format{
+A tibble with 319116 rows and 30 variables:
 \describe{
   \item{\code{speaker}}{speaker's ID}
   \item{\code{seconds}}{(s) time within audio file}
@@ -37,7 +38,8 @@
   \item{\code{c2}}{second consonant (C2)}
   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
-}}
+}
+}
 \usage{
 tongue_contours
 }

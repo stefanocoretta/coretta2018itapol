@@ -4,7 +4,8 @@
 \name{wavegram}
 \alias{wavegram}
 \title{Wavegram data of Italian and Polish vowels}
-\format{A data frame with 2212533 rows and 21 variables:
+\format{
+A data frame with 2212533 rows and 21 variables:
 \describe{
   \item{\code{speaker}}{speaker's ID}
   \item{\code{file}}{audio chunk file name}
@@ -29,7 +30,8 @@
   \item{\code{c2}}{second consonant (C2)}
   \item{\code{c2_phonation}}{voicing of C2 (\code{voiceless} or \code{voiced})}
   \item{\code{c2_place}}{place of C2 (\code{coronal}, \code{velar})}
-}}
+}
+}
 \usage{
 wavegram
 }
