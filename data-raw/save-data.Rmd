@@ -207,7 +207,25 @@ knot_labels <- tibble(
 )
 
 dlc_data <- dlc_data |> 
-  left_join(y = knot_labels)
+  left_join(y = knot_labels) |> 
+  mutate(
+    word = word(prompt, 2),
+    vowel = str_sub(word, 2, 2),
+    consonant = str_sub(word, 3, 3),
+    consonant = ifelse(consonant == "c", "k", consonant),
+    place = case_when(
+      consonant %in% c("t", "d") ~ "coronal",
+      consonant %in% c("k", "g") ~ "velar"
+    ),
+    voicing = case_when(
+      consonant %in% c("t", "k") ~ "voiceless",
+      consonant %in% c("d", "g") ~ "voiced"
+    ),
+    language = case_when(
+      str_detect(participant, "pl") ~ "Polish",
+      str_detect(participant, "it") ~ "Italian"
+    )
+  )
 ```
 
 
