@@ -697,6 +697,19 @@
       ],
       "Hash": "d6db1667059d027da730decdc214b959"
     },
+    "gsignal": {
+      "Package": "gsignal",
+      "Version": "0.3-5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "grDevices",
+        "pracma"
+      ],
+      "Hash": "000474ca7aa42533937282b8539b11b7"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.4",
@@ -1077,6 +1090,20 @@
       ],
       "Hash": "01f28d4278f15c76cddbea05899c5d6f"
     },
+    "pracma": {
+      "Package": "pracma",
+      "Version": "2.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "grDevices",
+        "graphics",
+        "stats",
+        "utils"
+      ],
+      "Hash": "44bc172d47d1ea0a638d9f299e321203"
+    },
     "prettyunits": {
       "Package": "prettyunits",
       "Version": "1.2.0",
@@ -1321,16 +1348,24 @@
     },
     "rticulate": {
       "Package": "rticulate",
-      "Version": "1.7.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "1.7.3.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "stefanocoretta",
+      "RemoteRepo": "rticulate",
+      "RemoteRef": "devel",
+      "RemoteSha": "954cff47e3b182b8c767144d199249ee4ef6ba4e",
       "Requirements": [
         "R",
+        "cli",
         "dplyr",
         "ggplot2",
         "glue",
+        "gsignal",
         "magrittr",
         "mgcv",
+        "pracma",
         "purrr",
         "readr",
         "rlang",
@@ -1340,7 +1375,7 @@
         "tidyr",
         "tidyselect"
       ],
-      "Hash": "91df2e0f47f4cf861e2d46d7b1db64d9"
+      "Hash": "34c1f3a21c6d2a7d8f530f0354923207"
     },
     "rvest": {
       "Package": "rvest",
