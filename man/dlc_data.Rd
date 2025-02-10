@@ -7,17 +7,17 @@
 \format{
 A tibble with DLC tongue knots data.:
 \describe{
-. \item{\code{participant}}{Participant's ID.}
-. \item{\code{date}}{Date of recording.}
-. \item{\code{time_rec}}{Time within recording.}
-. \item{\code{time_annot}}{Time within annotation interval.}
-. \item{\code{prompt}}{Prompt sentence.}
-. \item{\code{annotation}}{Label of annotation interval.}
-. \item{\code{knot}}{Knot number.}
-. \item{\code{dlc}}{DLC spline.}
-. \item{\code{X}}{X coordinate.}
-. \item{\code{Y}}{Y coordinate.}
-. \item{\code{knot_label}}{Knot label.}
+ \item{\code{participant}}{Participant's ID.}
+ \item{\code{date}}{Date of recording.}
+ \item{\code{time_rec}}{Time within recording.}
+ \item{\code{time_annot}}{Time within annotation interval.}
+ \item{\code{prompt}}{Prompt sentence.}
+ \item{\code{annotation}}{Label of annotation interval.}
+ \item{\code{knot}}{Knot number.}
+ \item{\code{dlc}}{DLC spline.}
+ \item{\code{X}}{X coordinate.}
+ \item{\code{Y}}{Y coordinate.}
+ \item{\code{knot_label}}{Knot label.}
 }
 }
 \usage{
