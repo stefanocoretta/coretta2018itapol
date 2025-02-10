@@ -172,7 +172,7 @@ tongue_contours <- list.files(
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%
-  read_aaa(., column_names = columns, knots = 42)
+  read_aaa(., column_names = columns, knots = 42, format = "long")
 ```
 
 `kinematics_series` is time series data of kinematik measures extracted from each ultrasonic frame along V1 duration.
@@ -226,6 +226,30 @@ dlc_data <- dlc_data |>
       str_detect(participant, "it") ~ "Italian"
     )
   )
+```
+
+```{r}
+#| label: dlc-voffset
+
+dlc_voff <- read_aaa(
+  "data-raw/datasets/ultrasound/dlc-voffset.tsv",
+  knots = 11
+)
+
+dlc_colnames <- colnames(dlc_voff)
+dlc_colnames[1:6] <- c("participant", "date", "time_rec", "time_annot", "prompt", "annotation")
+colnames(dlc_voff) <- dlc_colnames
+
+knot_labels <- tibble(
+  knot = 0:10,
+  dlc = "DLC_Tongue",
+  knot_label = c("Vallecula", "Root_1", "Root_2", "Body_1", "Body_2", "Dorsum_1", "Dorsum_2", "Blade_1", "Blade_2", "Tip_1", "Tip_2")
+)
+
+dlc_voff <- dlc_voff |>
+  left_join(y = knot_labels) |> 
+  mutate(word = word(prompt, 2)) |> 
+  left_join(y = stimuli)
 ```
 
 
@@ -297,6 +321,7 @@ usethis::use_data(token_measures, kinematics, formants_series, tracegram, tongue
 
 usethis::use_data(wavegram, compress = "xz", overwrite = TRUE)
 usethis::use_data(dlc_data, compress = "xz", overwrite = TRUE)
+usethis::use_data(dlc_voff, overwrite = TRUE)
 ```
 
 Save aggregated `csv` files for use in other software.
