@@ -80,10 +80,10 @@ gestures <- list.files(
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%
-  read_aaa(., columns, format = "wide") %>%
+  read_aaa(., column_names = columns, format = "wide", knots = 42) %>%
   separate(label, c("gesture", "part")) %>%
   # we only need the gesture data, not the spline data
-  select(-(part:Y_42)) %>%
+  select(-(part:frame_id)) %>%
   spread(gesture, seconds) %>%
   select(-closure)
 ```
@@ -117,8 +117,8 @@ kinematics <- list.files(
   full.names = TRUE
 ) %>%
   # the wide format gives one token per row
-  read_aaa(., columns, format = "wide") %>%
-  select(-(X_1:Y_42)) %>%
+  read_aaa(., column_names = columns, knots = 42, format = "wide") %>%
+  select(-(`X1 NA`:frame_id)) %>%
   left_join(y = token_measures)
 ```
 
@@ -172,7 +172,7 @@ tongue_contours <- list.files(
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%
-  read_aaa(., columns)
+  read_aaa(., column_names = columns, knots = 42)
 ```
 
 `kinematics_series` is time series data of kinematik measures extracted from each ultrasonic frame along V1 duration.
@@ -183,8 +183,8 @@ kinematics_series <- list.files(
   pattern = "*-vowel-series.tsv",
   full.names = TRUE
 ) %>%
-  read_aaa(., columns, format = "wide") %>%
-  select(-(X_1:Y_42)) %>%
+  read_aaa(., column_names = columns, knots = 42, format = "wide") %>%
+  select(-(`X1 NA`:`Y42 NA`)) %>%
   inner_join(y = token_measures) %>%
   mutate(
     proportion = (seconds - v1_ons) / (c2_ons - v1_ons)
@@ -309,6 +309,5 @@ write_csv(tracegram, file = "./data-raw/aggregated/tracegram.csv")
 write_csv(tongue_contours, file = "./data-raw/aggregated/tongue-contours.csv")
 write_csv(kinematics_series, file = "./data-raw/aggregated/kinematics-series.csv")
 write_csv(wavegram, file = "./data-raw/aggregated/wavegram.csv")
-write_csv(dlc_data, file = "./data-raw/aggregated/dlc-data.csv")
 ```
 
