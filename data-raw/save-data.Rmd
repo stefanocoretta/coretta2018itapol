@@ -237,7 +237,7 @@ dlc_voff <- read_aaa(
 )
 
 dlc_colnames <- colnames(dlc_voff)
-dlc_colnames[1:6] <- c("participant", "date", "time_rec", "time_annot", "prompt", "annotation")
+dlc_colnames[1:6] <- c("speaker", "date", "time_rec", "time_annot", "prompt", "annotation")
 colnames(dlc_voff) <- dlc_colnames
 
 knot_labels <- tibble(
@@ -248,8 +248,10 @@ knot_labels <- tibble(
 
 dlc_voff <- dlc_voff |>
   left_join(y = knot_labels) |> 
+  left_join(y = speakers) |> 
   mutate(word = word(prompt, 2)) |> 
-  left_join(y = stimuli)
+  left_join(y = stimuli) |> 
+  filter(speaker != "it04")
 ```
 
 

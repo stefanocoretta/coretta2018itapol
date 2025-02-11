@@ -386,7 +386,9 @@
 
 #' DLC tongue knots data of Italian and Polish at vowel offset
 #'
-#' It contains the DLC tongue knots coordinates at the offset of the first vowel in CVCV target words.
+#' It contains the DLC tongue knots coordinates at the offset of the first vowel
+#' in CVCV target words. The coordinates have been rotated based on a fiducial
+#' line corresponding to the lower surface of a bite plate.
 #'
 #' @format A tibble with DLC tongue knots data.:
 #' \describe{
