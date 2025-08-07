@@ -201,9 +201,9 @@ dlc_colnames[1:6] <- c("participant", "date", "time_rec", "time_annot", "prompt"
 colnames(dlc_data) <- dlc_colnames
 
 knot_labels <- tibble(
-  knot = 0:10,
-  dlc = "DLC_Tongue",
-  knot_label = c("Vallecula", "Root_1", "Root_2", "Body_1", "Body_2", "Dorsum_1", "Dorsum_2", "Blade_1", "Blade_2", "Tip_1", "Tip_2")
+  knot = c(0:10, 0:1, 0:1),
+  spline = c(rep("DLC_Tongue", 11), rep("DLC_HyoidMandible", 2), rep("DLC_ShorttendonMandible", 2)),
+  knot_label = c("Vallecula", "Root_1", "Root_2", "Body_1", "Body_2", "Dorsum_1", "Dorsum_2", "Blade_1", "Blade_2", "Tip_1", "Tip_2", "Hyoid", "Mandible", "Short_tendon", "Mandible")
 )
 
 dlc_data <- dlc_data |> 
@@ -241,9 +241,9 @@ dlc_colnames[1:6] <- c("speaker", "date", "time_rec", "time_annot", "prompt", "a
 colnames(dlc_voff) <- dlc_colnames
 
 knot_labels <- tibble(
-  knot = 0:10,
-  dlc = "DLC_Tongue",
-  knot_label = c("Vallecula", "Root_1", "Root_2", "Body_1", "Body_2", "Dorsum_1", "Dorsum_2", "Blade_1", "Blade_2", "Tip_1", "Tip_2")
+  knot = c(0:10, 0:1, 0:1),
+  spline = c(rep("DLC_Tongue", 11), rep("DLC_HyoidMandible", 2), rep("DLC_ShorttendonMandible", 2)),
+  knot_label = c("Vallecula", "Root_1", "Root_2", "Body_1", "Body_2", "Dorsum_1", "Dorsum_2", "Blade_1", "Blade_2", "Tip_1", "Tip_2", "Hyoid", "Mandible", "Short_tendon", "Mandible")
 )
 
 dlc_voff <- dlc_voff |>
